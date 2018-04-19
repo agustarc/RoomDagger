@@ -1,7 +1,8 @@
-package com.leopold.roomdagger
+package com.leopold.roomdagger.ui
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.leopold.roomdagger.R
 
 /**
  * @author Leopold
