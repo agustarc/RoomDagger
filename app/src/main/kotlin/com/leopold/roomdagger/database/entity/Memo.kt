@@ -12,7 +12,7 @@ import java.util.*
 /**
  * @author Leopold
  */
-@Entity(tableName = "memo")
+@Entity(tableName = "Memo")
 @TypeConverters(AttachmentConverter::class, DateConverter::class)
 data class Memo(
         @PrimaryKey(autoGenerate = true)
