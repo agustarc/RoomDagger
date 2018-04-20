@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#5153DE</color>
+    <color name="colorPrimaryDark">#5153DE</color>
+    <color name="colorAccent">#5153DE</color>
     <color name="colorBackground">#EEEEEE</color>
     <color name="colorDivider">#EFEFEF</color>
+
+    <!-- General -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Text-->
+    <color name="textPrimaryColor">#0F0C07</color>
+    <color name="textAccentColor">#5153DE</color>
+    <color name="textControlNormalColor">#4C4C4C</color>
+    <color name="textDarkGreyColor">#727171</color>
+    <color name="textCaptionColor">#C9CACA</color>
+    <color name="textErrorColor">#AF001E</color>
+
+    <!-- SwipeRefresh Progress Color -->
+    <color name="progress_color1">#FF5722</color>
+    <color name="progress_color2">#FFEB3B</color>
+    <color name="progress_color3">#2196F3</color>
+    <color name="progress_color4">#4CAF50</color>
+
 </resources>

@@ -1,5 +1,8 @@
 package com.leopold.roomdagger.ui.list
 
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.leopold.roomdagger.ActivityModule
 import com.leopold.roomdagger.App
 import com.leopold.roomdagger.R
@@ -9,13 +12,22 @@ import com.leopold.roomdagger.presenter.ActivityPresenterModule
 import com.leopold.roomdagger.presenter.BasePresenter
 import com.leopold.roomdagger.presenter.list.MemoListPresenter
 import com.leopold.roomdagger.ui.PresenterActivity
+import com.leopold.roomdagger.ui.widget.OnItemClickListener
+import com.leopold.roomdagger.ui.widget.VerticalDividerItemDecoration
+import kotlinx.android.synthetic.main.activity_memo_list.*
 import javax.inject.Inject
 
 /**
  * @author Leopold
  */
-class MemoListActivity : PresenterActivity<MemoListPresenter.View>(), MemoListPresenter.View {
+class MemoListActivity : PresenterActivity<MemoListPresenter.View>(), MemoListPresenter.View, OnItemClickListener {
     @Inject lateinit var presenter: MemoListPresenter
+
+    private val toolbar by lazy { memo_list_toolbar }
+    private val refreshLayout by lazy { memo_list_refresh_layout }
+    private val recyclerView by lazy { memo_list_recycler_view }
+
+    private var adapter: MemoRecyclerAdapter? = null
 
     override fun getPresenter(): BasePresenter<MemoListPresenter.View>? {
         return presenter
@@ -33,15 +45,38 @@ class MemoListActivity : PresenterActivity<MemoListPresenter.View>(), MemoListPr
         return R.layout.activity_memo_list
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setRefreshLayoutColor(refreshLayout, false)
+
+        recyclerView.setHasFixedSize(false)
+        recyclerView.addItemDecoration(VerticalDividerItemDecoration(this, R.dimen.margin_general))
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        presenter.getMemos()
+    }
+
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        refreshLayout.isRefreshing = true
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        refreshLayout.isRefreshing = false
     }
 
     override fun setAdapter(memos: ArrayList<Memo>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (adapter == null) {
+            adapter = MemoRecyclerAdapter(this, memos).apply {
+                setOnItemClickListener(this@MemoListActivity)
+                recyclerView.adapter = this
+            }
+        } else {
+            adapter?.replace(memos)
+        }
+    }
+
+    override fun onItemClick(view: View, position: Int) {
+
     }
 }
